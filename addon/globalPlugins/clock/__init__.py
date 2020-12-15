@@ -58,7 +58,7 @@ def secondsToString(seconds):
 	"""
 	text=""
 	tm=time.gmtime(seconds)
-	hr = int(seconds) / 3600
+	hr = tm.tm_hour
 	if hr > 0:
 		if hr > 23:
 			hr = 24* (hr / 24) + (hr % 24)
@@ -131,6 +131,8 @@ def getDayAndWeekOfYear (date):
 	if curYear == gregYear:
 		# It's a Gregorian year.
 		total = convertdate.gregorian.YEAR_DAYS
+		if convertdate.gregorian.isleap(gregYear):
+			total+=1
 		nDayOfYear = int (now.timetuple()[7])
 	else:
 		# It's a Hijri year.
